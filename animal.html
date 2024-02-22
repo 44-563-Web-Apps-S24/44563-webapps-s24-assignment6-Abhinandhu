@@ -1,9 +1,35 @@
 <!DOCTYPE html>
 <html>
- 
+    <head>
+        <title>Animal game</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" 
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+        <style>
+        /* Your CSS styles go here */
+        body {
+            background-color: #c7e2e0;
+            font-family: Arial, sans-serif;
+        }
+        .error-message {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    </head> 
 <body>
 
-<h2>Animal game by Abhinandhu</h2>
+    <h2>Animal game by Abhinandhu</h2>
+    <h3>Guess The Animal</h3>
 
     <form>
         <label for="The hidden animal type" style="font-size: 100%; ">The hidden animal type: </label>
@@ -13,39 +39,47 @@
         <label for="Guess the animal" style="font-size: 100%; ">Guess the animal: </label>
         <input style="font-size: 100%; " type="text" id="Guess-the-animal">
         <br>
-        <br><button type="button" onclick="checkAnimal()" style="font-size: 100%; font-family: 'Courier New', Courier, monospace;">
-            Check the guess</button>
+
+        <input type="button" class="btn btn-success" onclick="checkAnimal()" value="Check the Guess">
+
     </form>
-    <br>
-    <div id="result" style="font-size: 100%;"></div>
-    <script>
-    let wrong = 0;
-    let correct = 0;
-    function checkAnimal() {
-        const hiddenAnimalInput = document.getElementById('Hidden-animal-type');
-        const guessAnimalInput = document.getElementById('Guess-the-animal');
-        const resultElement = document.getElementById('result');
-        if (hiddenAnimalInput.value === guessAnimalInput.value){
-            correct++;
-            alert("Ruff ruff");
-        } else {
-            wrong++;
-            alert("Grrrr");
-        }
-        resultElement.innerHTML = `<p>Correct guess: ${correct}, Wrong guess: ${wrong}</p>`; 
-        guessAnimalInput.value = '';
-        }
-    </script>
 
-
-
+    <p id="guess">Print Guesses result</p>
     <div>
-        <img src="africola.jpg" height="150" width="150" alt="Images" onclick="selectImage()" id="drinksImage">
+        <button type="button"><img src="africola.jpg" alt="africola" width="150" height="150" 
+            onclick="selectImage()" id="drinksImage"  ></button>
     </div>
 
     <script>
-        let useImage = 1
-        function selectImage(){
+    let useImage=1;
+    let wrong = 0;
+    let correct = 0;
+
+    function checkAnimal()
+    {
+        var HiddenAnimal = document.getElementById("Hidden-animal-type").defaultValue;
+        
+        var GuessAnimal = document.getElementById("Guess-the-animal").value;
+        if(HiddenAnimal==GuessAnimal)
+        {
+            correct=correct+1;
+            document.getElementById("guess").innerHTML = "Correct: "+correct+"wrong: "+wrong;
+            alert("Ruff ruff");
+        }
+        else
+        {
+            wrong+=1;
+            document.getElementById("guess").innerHTML =  "Correct: "+correct+"wrong: "+wrong;
+            alert("Grrrr");
+        }
+        if(wrong>correct)
+        {
+            alert("Sorry, too many wrong guesses.");
+            document.getElementById("guess").innerHTML =  "<span class='error-message'>Sorry, too many wrong guesses.</span>";
+        }
+    }
+
+    function selectImage(){
             switch(useImage) {
                 case 1:
                     document.getElementById("drinksImage").setAttribute("src", "africola.jpg")
@@ -61,6 +95,31 @@
                     break
             }
         }
+
+
+    </script>
+
+
+
+    <script>
+        // let useImage = 1
+        // useImage = 1
+        // function selectImage(){
+        //     switch(useImage) {
+        //         case 1:
+        //             document.getElementById("drinksImage").setAttribute("src", "africola.jpg")
+        //             useImage = 2
+        //             break
+        //         case 2:
+        //             document.getElementById("drinksImage").setAttribute("src", "evoca.jpg")
+        //             useImage = 3
+        //             break
+        //         case 3:
+        //             document.getElementById("drinksImage").setAttribute("src", "pepsi.jpg")
+        //             useImage = 1
+        //             break
+        //     }
+        // }
 
     </script>
 
